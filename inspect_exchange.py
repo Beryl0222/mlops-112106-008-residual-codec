@@ -20,12 +20,12 @@ def inspect(path: Path) -> dict:
 
 def validate(data: dict) -> None:
     for segment in data["segments"]:
-            layers = data["books"][segment["group"]]
-            assert 0 <= segment["approved"] <= segment["requested"] <= len(layers)
-            assert len(segment["frames"]) == len(segment["mask"])
-            assert np.shape(segment["frames"])[1] == np.shape(layers[0])[1]
-        for group, layer, code, count in data["cold"]:
-            assert code < len(data["books"][group][layer]) and count < data["policy"]["cold_after"]
+        layers = data["books"][segment["group"]]
+        assert 0 <= segment["approved"] <= segment["requested"] <= len(layers)
+        assert len(segment["frames"]) == len(segment["mask"])
+        assert np.shape(segment["frames"])[1] == np.shape(layers[0])[1]
+    for group, layer, code, count in data["cold"]:
+        assert code < len(data["books"][group][layer]) and count < data["policy"]["cold_after"]
 
 
 def main() -> None:
